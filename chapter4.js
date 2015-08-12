@@ -25,3 +25,30 @@ function sum(array) {
 
 console.log(sum(range(1, 10)));
 // → 55
+
+
+// Modify your range function to take an optional third argument 
+// that indicates the “step” value used to build up the array. 
+// If no step is given, the array elements go up by increments 
+// of one, corresponding to the old behavior.
+
+function rangeStep(start, end, step){
+  var rangeArray = [];
+  if (step == null) step = 1;
+  if (step > 0) {
+    for (var count = start; count <= end; count += step) {
+      rangeArray.push(count)
+    }
+  }
+  else {
+    for (var count = start; count >= end; count += step) {
+      rangeArray.push(count)
+    }
+  }
+  return(rangeArray);
+}
+
+console.log(sum(rangeStep(1, 10)));
+// → 55
+console.log(rangeStep(5, 2, -1));
+// → [5, 4, 3, 2]
