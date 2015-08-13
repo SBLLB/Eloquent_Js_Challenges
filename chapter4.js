@@ -97,3 +97,44 @@ function reverseArrayInPlace(array) {
   }
   return array;
 }
+
+// The == operator compares objects by identity. 
+// But sometimes, you would prefer to compare the values 
+// of their actual properties.
+
+// Write a function, deepEqual, that takes two values and 
+// returns true only if they are the same value or are objects 
+// with the same properties whose values are also equal when 
+// compared with a recursive call to deepEqual.
+
+function deepEqual(obj1, obj2) {
+  if (obj1 === obj2) {return true};
+  if (obj1 == null || obj2 == null || 
+      typeof obj1 != "object" || 
+      typeof obj2 != "object") {
+    return false 
+  };
+  var properties1 = 0, properties2 =0;
+  
+  for (var property in obj1) {
+    properties1 += 1
+  };
+  
+  for (var property in obj2) {
+    properties2 += 1
+  };
+  
+  if (!(property in obj1) || !deepEqual(obj1[property], obj2[property])) {
+    return false
+  };
+  
+  return properties1 == properties2;
+};
+
+var obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+// → true
+console.log(deepEqual(obj, {here: 1, object: 2}));
+// → false
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+// → true
